@@ -1,0 +1,299 @@
+/* Palette tirée des armes della Rovere (azur, chêne d'or) et de la pierre de Meuse */
+:root {
+  --pierre: #E4E2DB;       /* calcaire clair */
+  --pierre-fonce: #D3D0C6; /* calcaire ombré */
+  --encre: #1B2433;        /* texte */
+  --azur: #17407A;         /* bleu des armes, version profonde */
+  --azur-nuit: #102C55;
+  --or: #E2AE2C;           /* chêne d'or, sur fond sombre */
+  --or-texte: #8A6410;     /* or lisible sur fond clair */
+  --pourpre: #7E1E2A;      /* rouge pontifical, très ponctuel */
+  --gris: #565B63;
+
+  --serif: "EB Garamond", Garamond, "Times New Roman", serif;
+  --capitales: "Cinzel", "Trajan Pro", var(--serif);
+
+  --mesure: 36rem;
+  --gouttiere: clamp(1rem, 4vw, 3rem);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--pierre);
+  color: var(--encre);
+  font-family: var(--serif);
+  font-size: 1.1875rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+a { color: var(--azur); text-underline-offset: 0.18em; }
+a:hover { color: var(--pourpre); }
+
+:focus-visible { outline: 3px solid var(--or); outline-offset: 3px; }
+
+h1, h2, h3 { font-weight: 500; line-height: 1.15; margin: 0 0 0.6em; }
+h2 { font-size: clamp(1.9rem, 1.4rem + 2vw, 2.75rem); color: var(--azur); }
+h3 { font-size: 1.3rem; font-weight: 600; }
+p { margin: 0 0 1em; }
+
+.skip {
+  position: absolute; left: -999px; top: 0;
+  background: var(--azur); color: #fff; padding: .5rem 1rem; z-index: 100;
+}
+.skip:focus { left: 1rem; }
+
+/* Barre du haut */
+.topbar {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: .6rem var(--gouttiere);
+  background: rgba(228, 226, 219, .94);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--pierre-fonce);
+}
+.marque {
+  display: flex; align-items: center; gap: .6rem;
+  text-decoration: none; color: var(--encre);
+  font-family: var(--capitales); font-size: .95rem; letter-spacing: .04em;
+}
+.topbar nav { display: flex; gap: 1.4rem; align-items: center; }
+.topbar nav a { color: var(--encre); text-decoration: none; font-size: 1.05rem; }
+.topbar nav a:hover { color: var(--azur); text-decoration: underline; }
+.topbar nav .nav-contact {
+  background: var(--azur); color: #fff; padding: .3rem .9rem; border-radius: 2rem;
+}
+.topbar nav .nav-contact:hover { background: var(--azur-nuit); color: #fff; text-decoration: none; }
+.menu-btn { display: none; }
+
+@media (max-width: 860px) {
+  .menu-btn {
+    display: block; font: inherit; font-size: 1rem;
+    background: none; border: 1px solid var(--encre); border-radius: 2rem;
+    padding: .25rem .9rem; color: var(--encre); cursor: pointer;
+  }
+  .topbar nav {
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: flex-start; gap: 0;
+    background: var(--pierre); border-bottom: 1px solid var(--pierre-fonce);
+    padding: .5rem var(--gouttiere) 1rem;
+  }
+  .topbar nav.ouvert { display: flex; }
+  .topbar nav a { padding: .55rem 0; width: 100%; }
+  .topbar nav .nav-contact { width: auto; margin-top: .5rem; padding: .4rem 1rem; }
+}
+
+/* Accueil */
+.hero {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+  padding: clamp(2.5rem, 6vw, 5rem) var(--gouttiere) clamp(3rem, 7vw, 6rem);
+  max-width: 76rem; margin: 0 auto;
+}
+/* L'inscription du portail, traitée comme une gravure dans la pierre */
+.gravure {
+  font-family: var(--capitales);
+  font-weight: 600;
+  font-size: clamp(2.1rem, .6rem + 7vw, 7.4rem);
+  letter-spacing: .06em;
+  line-height: 1;
+  margin: 0 0 .9rem;
+  color: #B9B5A9;
+  text-shadow: -1px -1px 0 rgba(60, 55, 45, .55), 1px 1px 0 rgba(255, 255, 255, .85);
+  white-space: nowrap;
+}
+.hero-gravure { grid-column: 1 / -1; }
+.gravure-note { font-style: italic; color: var(--gris); font-size: 1rem; margin: 0; }
+.hero h1 {
+  font-size: clamp(2.3rem, 1.6rem + 2.6vw, 3.6rem);
+  color: var(--azur);
+  margin-bottom: 1.2rem;
+}
+.hero h1 span {
+  display: block; font-style: italic; font-weight: 400;
+  font-size: .5em; color: var(--encre); margin-top: .35rem;
+}
+.chapeau { font-size: 1.3rem; line-height: 1.55; max-width: 34rem; }
+.actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
+
+.btn {
+  display: inline-block; font: inherit; font-size: 1.1rem; font-weight: 500;
+  padding: .7rem 1.5rem; border-radius: 2rem; text-decoration: none; cursor: pointer;
+  border: 1.5px solid var(--azur);
+}
+.btn-plein { background: var(--azur); color: #fff; }
+.btn-plein:hover { background: var(--azur-nuit); color: #fff; }
+.btn-trait { background: transparent; color: var(--azur); }
+.btn-trait:hover { background: var(--azur); color: #fff; }
+.btn-or { background: var(--or); color: var(--azur-nuit); border-color: var(--or); }
+.btn-or:hover { background: #F0C24A; }
+
+/* Le motif de la maison : l'arc en plein cintre du portail */
+.arche { margin: 0; }
+.arche img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 50% 50% 0 0 / 34% 34% 0 0;
+}
+.hero-image { position: relative; }
+.hero-image::after {
+  content: ""; position: absolute; inset: -14px -14px auto -14px; height: calc(100% + 14px);
+  border: 1.5px solid var(--or-texte);
+  border-bottom: 0;
+  border-radius: 50% 50% 0 0 / 34% 34% 0 0;
+  pointer-events: none;
+}
+.hero-image img { object-position: center 30%; }
+
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; row-gap: 2rem; }
+  .hero-image { max-width: 24rem; width: 85%; margin: 1rem auto 0; }
+  .gravure { white-space: normal; }
+}
+
+/* Sections */
+.bloc { padding: clamp(3.5rem, 8vw, 6.5rem) var(--gouttiere); }
+.bloc > h2, .bloc > .intro, .bloc > .deux-col, .bloc > .frise, .bloc > .galerie {
+  max-width: 72rem; margin-left: auto; margin-right: auto;
+}
+.bloc > .intro { color: var(--gris); margin-bottom: 2.5rem; max-width: 72rem; }
+.bloc-pierre { background: var(--pierre-fonce); }
+.bloc-azur { background: var(--azur); color: #EDEBE4; }
+.bloc-azur h2 { color: var(--or); }
+.bloc-azur a { color: var(--or); }
+
+.deux-col {
+  display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .9fr);
+  gap: clamp(2rem, 5vw, 5rem); align-items: start;
+}
+.deux-col.inverse { grid-template-columns: minmax(0, .9fr) minmax(0, 1.3fr); align-items: center; }
+.texte { max-width: var(--mesure); }
+@media (max-width: 860px) {
+  .deux-col, .deux-col.inverse { grid-template-columns: 1fr; }
+}
+
+blockquote {
+  margin: 2rem 0 0; padding: 0 0 0 1.2rem;
+  border-left: 3px solid var(--or-texte);
+}
+blockquote p { font-size: 1.45rem; font-style: italic; line-height: 1.4; margin-bottom: .4rem; }
+cite { font-style: normal; color: var(--gris); font-size: 1rem; }
+
+.fiche dl { margin: 0; border-top: 1px solid var(--encre); }
+.fiche dl > div {
+  display: grid; grid-template-columns: 8.5rem 1fr; gap: 1rem;
+  padding: .85rem 0; border-bottom: 1px solid var(--pierre-fonce);
+}
+.fiche dt { font-weight: 600; color: var(--azur); }
+.fiche dd { margin: 0; }
+@media (max-width: 480px) {
+  .fiche dl > div { grid-template-columns: 1fr; gap: .1rem; }
+}
+
+.photo-cadre { margin: 0; }
+.photo-cadre img { width: 100%; border: 10px solid var(--pierre); }
+figcaption { font-size: .95rem; font-style: italic; color: var(--gris); margin-top: .6rem; }
+.note { font-style: italic; color: var(--gris); }
+.bloc-azur .note { color: #C9CFDA; }
+
+.arche-petite { max-width: 22rem; justify-self: center; width: 100%; }
+
+/* Frise chronologique : la seule vraie séquence de la page */
+.frise { list-style: none; padding: 0; margin-top: 0; position: relative; }
+.frise::before {
+  content: ""; position: absolute; left: 9.5rem; top: .6rem; bottom: .6rem;
+  width: 1.5px; background: var(--or-texte);
+}
+.frise li {
+  display: grid; grid-template-columns: 8.5rem 1fr; gap: 2.5rem;
+  padding: 0 0 2.2rem; position: relative;
+}
+.frise li::before {
+  content: ""; position: absolute; left: calc(9.5rem - 5px); top: .55rem;
+  width: 11px; height: 11px; border-radius: 50%;
+  background: var(--pierre); border: 2px solid var(--or-texte);
+}
+.frise .date {
+  font-size: 1.3rem; font-weight: 600; font-variant-numeric: oldstyle-nums;
+  text-align: right; color: var(--azur); line-height: 1.3;
+}
+.frise h3 { margin-bottom: .25rem; }
+.frise p { max-width: var(--mesure); margin: 0; }
+@media (max-width: 640px) {
+  .frise::before { left: 5px; }
+  .frise li { grid-template-columns: 1fr; gap: .2rem; padding-left: 2rem; }
+  .frise li::before { left: 0; }
+  .frise .date { text-align: left; }
+}
+
+/* Galerie */
+.galerie { columns: 3 16rem; column-gap: 1.2rem; }
+.galerie figure { margin: 0 0 1.4rem; break-inside: avoid; }
+.galerie button {
+  display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in;
+}
+.galerie img { width: 100%; }
+.galerie button:hover img { filter: brightness(1.06); }
+
+.visionneuse {
+  border: 0; padding: 1rem; background: transparent; max-width: 96vw; max-height: 96vh;
+}
+.visionneuse::backdrop { background: rgba(16, 24, 38, .92); }
+.visionneuse img { max-width: 92vw; max-height: 82vh; margin: 0 auto; }
+.visionneuse .legende { color: #EDEBE4; text-align: center; font-style: italic; margin: .8rem 0 0; }
+.visionneuse .fermer {
+  position: fixed; top: 1rem; right: 1rem;
+  width: 2.8rem; height: 2.8rem; border-radius: 50%;
+  border: 1px solid #EDEBE4; background: transparent; color: #EDEBE4;
+  font-size: 1.8rem; line-height: 1; cursor: pointer;
+}
+
+/* Visiter */
+.acces { border-top: 1px solid var(--encre); padding-top: 1rem; }
+.lien { font-weight: 600; }
+
+/* Contact */
+.contact {
+  background: var(--azur-nuit); color: #EDEBE4;
+  display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  padding: clamp(3.5rem, 8vw, 6.5rem) max(var(--gouttiere), calc((100% - 72rem) / 2));
+}
+.contact h2 { color: var(--or); margin-top: 1.2rem; }
+.contact-intro p { max-width: 30rem; }
+.mail { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; margin-top: 1.6rem; }
+.mail a { color: #fff; font-size: 1.25rem; overflow-wrap: anywhere; }
+.copier {
+  font: inherit; font-size: .95rem; color: var(--or); background: none;
+  border: 1px solid var(--or); border-radius: 2rem; padding: .2rem .8rem; cursor: pointer;
+}
+.formulaire { display: grid; gap: 1.1rem; }
+.champ { display: grid; gap: .3rem; }
+.champ label { font-weight: 500; }
+.champ input, .champ select, .champ textarea {
+  font: inherit; font-size: 1.1rem; color: var(--encre);
+  background: #F3F2EE; border: 1px solid transparent; border-radius: 4px;
+  padding: .6rem .8rem; width: 100%;
+}
+.champ textarea { resize: vertical; }
+.champ [aria-invalid="true"] { border-color: #F08A8A; box-shadow: 0 0 0 2px #F08A8A; }
+.formulaire .btn { justify-self: start; }
+.erreur { color: #FFB4B4; margin: 0; }
+.aide { font-size: .95rem; color: #C9CFDA; margin: 0; }
+@media (max-width: 860px) { .contact { grid-template-columns: 1fr; } }
+
+/* Pied de page */
+.pied {
+  padding: 2.5rem var(--gouttiere); text-align: center;
+  font-size: 1rem; color: var(--gris);
+}
+.pied p { margin: 0 0 .6rem; }
